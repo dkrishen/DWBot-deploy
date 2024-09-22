@@ -1,19 +1,12 @@
 version: '3.4'
 
 services:
-  sqlite3:
-    image: nouchka/sqlite3:latest
-    stdin_open: true
-    tty: true
-    volumes:
-      - ./db:/root/db/
-    restart: always
   dwbot:
-    image: dkrishen/dw-bot:demo-1.1
+    image: dkrishen/dw-bot:demo-1.7
     container_name: dw-bot
-    depends_on:
-      - sqlite3
     environment:
-      - BotConfiguration__BotToken=$BOTTOKEN
+      - BotConfiguration__BotToken=<token>
     restart: always
-      
+    volumes:
+      - ./database/:/app/database/:rw
+      - ./logs/:/app/logs/:rw
